@@ -23,7 +23,10 @@ $(document).ready(function(){
         text = "(로그인 화면)";
         break;
       case "cus/selectProduct":
-        text = "(서비스 선택)";
+        text = "(이용 서비스 선택)";
+        break;
+      case "mrs2/manager/resume/popResume":
+        text = "[2.0] > (이력서 팝업)";
         break;
       // 채용공고관리
       case "mrs2/manager/recruitNotice/list":
@@ -367,6 +370,43 @@ $(document).ready(function(){
         break;
       case "interview/ai/login":
         text = "(AI 응시자 사이트) > (로그인 화면)";
+        break;
+      // 평가자 사이트
+      case "bbs/eval/notice/list":
+        text = "(평가자 사이트) > (공지사항)";
+        break;
+      case "bbs/eval/notice/read":
+        text = "(평가자 사이트) > (공지사항) > (글 읽기)";
+        break;
+      case "bbs/eval/qna/list":
+        text = "(평가자 사이트) > (Q&A) > (글 목록)";
+        break;
+      case "bbs/eval/qna/write":
+        text = "(평가자 사이트) > (Q&A) > (글 작성)";
+        break;
+      case "bbs/eval/qna/read":
+        text = "(평가자 사이트) > (Q&A) > (글 읽기)";
+        break;
+      case "bbs/eval/qna/update":
+        text = "(평가자 사이트) > (Q&A) > (글 수정)";
+        break;
+      case "cus/evaluation/myStepList":
+        text = "(평가자 사이트) > (지원자 평가) > (평가 목록)";
+        break;
+      case "mrs2/eval/screening/document":
+        text = "(평가자 사이트) > (지원자 평가) > (평가 목록) > (서류 전형)";
+        break;
+      case "mrs2/eval/screening/exam":
+        text = "(평가자 사이트) > (지원자 평가) > (평가 목록) > (시험 전형)";
+        break;
+      case "mrs2/eval/screening/interview":
+        text = "(평가자 사이트) > (지원자 평가) > (평가 목록) > (면접 전형)";
+        break;
+      case "mrs2/eval/resume/popResume":
+        text = "(평가자 사이트) > (지원자 평가) > (평가 목록) > (전형 선택) > (이력서 팝업)";
+        break;
+      case "cus/evaluation/password":
+        text = "(평가자 사이트) > (비밀번호 변경)";
         break;
       default:
     }
