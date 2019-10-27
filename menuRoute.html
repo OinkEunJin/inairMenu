@@ -19,8 +19,11 @@ $(document).ready(function(){
     var text = $("#data").val();
 
     var pattern = /(.*net|.*kr)\/(.*)/;
-    console.log(pattern.test(text));
-    console.log(RegExp.$2);
+    /*
+    정규식 pattern 확인
+    console.log(pattern.test(text)); // true, false
+    console.log(RegExp.$2); // 맵핑되는 $2 값 
+    */
 
     // 정규식 정리 http://www.nextree.co.kr/p4327/
     // 정규식 패턴 확인 https://regexr.com/
