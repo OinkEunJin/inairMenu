@@ -14,10 +14,9 @@ $(document).ready(function(){
 	// 입력란에 입력을 하면 입력내용에 내용이 출력
 	// 1. #data 공간에서 keyup이라는 이벤트가 발생했을 때
 
-
-	$("#data").keyup(function(){
-		// 2. #out 공간에 #data의 내용이 출력된다.
-    var text = $("#data").val();
+	$("#url").keyup(function(){
+		// 2. #out 공간에 #url의 내용이 출력된다.
+    var text = $("#url").val();
     var pattern = /(.*net|.*kr)\/(.*)/;
 
     console.log(pattern.test(text)); // true, false
@@ -483,30 +482,34 @@ $(document).ready(function(){
         break;
       default:
     }
-    var total = "";
-    total = text;
+    var total = text;
 
 		$("#out").text(total);
-
 		// #out의 위치에 text로 데이터를 받는다.(setter)
-		// 들어가는 데이터는 #data의 값(.val())이다. (getter)
+		// 들어가는 데이터는 #url의 값(.val())이다. (getter)
 		// 메서드 괄호 안에 아무것도 없으면 getter, 파라미터가 있으면 setter이다.
 	});
-
+  var name = $("#nameOption").val();
   $("#nameOption").change(function(){
-    var name = $("#nameOption").val();
     $("#name").text(name);
   });
-  $("#dateOption").change(function(){
+
   var date = $("#dateOption").val();
+  $("#dateOption").change(function(){
     $("#date").text(date);
   });
+
 });
 
 </script>
   <body>
     <form>
     키보드로 입력한 내용이 아래에 출력(입력값을 가져와서 입력내용에 전달한다.)<br/><br/>
+    이슈 유형 :
+    <select class="" id="issueType">
+      <option value="Bug">Bug</option>
+      <option value="Requirement">Requirement</option>
+    </select><br/>
     이름 선택 :
     <select class="" id="nameOption">
       <option value="나동근" >나동근</option>
@@ -514,20 +517,100 @@ $(document).ready(function(){
       <option value="천동영">천동영</option>
       <option value="김영훈">김영훈</option>
     </select><br/>
-    날짜 선택 : <input type="date" name="" id="dateOption"><br/>
+    답변 기한 : <input type="date" name="" id="dateOption"><br/>
 
-    url 주소 입력 : <input id="data" autofocus><br/><br/>
+    url 주소 입력 : <input id="url" autofocus><br/><br/>
     결과 값 : <br/>
-    안녕하세요 솔루션 내 문제가 의심되는 부분이 있어서 확인 요청드립니다.<br/>
-    아래 내용 확인 부탁드립니다.<br/><br/>
-    h3. 답변 기한<br/>
-    ：<span id="date"></span> <br/>
-    h3. 이슈 요청자 <br/>
-    ：<span id="name"></span> <br/>
-    h3. 메뉴 경로 <br/>
-    ：<span id="out">출력되는 곳</span>
+    <hr>
     </form>
+    <div class="" id="field"></div>
+    <script type="text/javascript">
+      /* 디폴트값 설정하기 */
+      // 이름
+      var nameOption = document.getElementById("nameOption");
+      var name = nameOption.options[nameOption.selectedIndex].value;
+      // 날짜
+      var today = new Date();
+      var dd = today.getDate()+3;
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
 
+      if(dd<10) {
+          dd='0'+dd
+      }
+      if(mm<10) {
+          mm='0'+mm
+      }
+      today = yyyy+'-'+mm+'-'+dd;
+      document.getElementById("dateOption").value = today;
+      // 테스트 주소
+      var txt;
+      $("#url").keyup(function(){
+    		// 2. #out 공간에 #url의 내용이 출력된다.
+        txt = $("#url").val();
+        document.getElementById("testUrl").innerHTML = txt;
+        console.log('keyup중..');
+      });
+    </script>
+    <script type="text/javascript">
+      var issueType = document.getElementById("issueType").value;
+      var temp = $("#url").val();
+      console.log('temp:'+temp);
+      console.log('txt:'+txt);
+      var BugTxt =
+      '안녕하세요 솔루션 내 문제가 의심되는 부분이 있어서 확인 요청드립니다.<br/>'
+      +'아래 내용 확인 부탁드립니다.<br/><br/>'
+      +'h3. 의견 <br/>'
+      +'：<br/>'
+      +'h3. 답변 기한<br/>'
+      +'：<span id="date">'+today+'</span> <br/>'
+      +'h3. 이슈 요청자 <br/>'
+      +'：<span id="name">'+name+'</span> <br/>'
+      +'h3. 요청 고객사<br/>'
+      +'：<br/>'
+      +'h3. 메뉴 경로 <br/>'
+      +'：<span id="out"></span><br/>'
+      +'h3. 테스트 주소<br/>'
+      +'：<span id="testUrl"></span><br/>'
+      +'h3. 기대 결과<br/>'
+      +'：<br/>'
+      +'h3. 실제 결과<br/>'
+      +'：<br/>'
+      ;
+      var ReqTxt =
+      '안녕하세요. 솔루션 내 개선 요청이 있어서 작성드립니다.<br/>'
+      +'아래 내용 검토 부탁드립니다.<br/><br/>'
+      +'h3. 답변 기한<br/>'
+      +'：<span id="date">'+today+'</span> <br/>'
+      +'h3. 이슈 요청자 <br/>'
+      +'：<span id="name">'+name+'</span> <br/>'
+      +'h3. 요청 고객사<br/>'
+      +'：<br/>'
+      +'h3. 메뉴 경로 <br/>'
+      +'：<span id="out"></span><br/>'
+      +'h3. 테스트 주소<br/>'
+      +'：<span id="testUrl"></span><br/>'
+      +'h3. 사유<br/>'
+      +'：'
+
+      ;
+      document.getElementById("field").innerHTML = BugTxt; // default 값
+      var menuPathTemp = document.getElementById("out");
+      $("#issueType").change(function(){
+        var issueType =  $("#issueType").val();
+        if(issueType == "Bug"){
+          document.getElementById("field").innerHTML = BugTxt;
+          console.log('11');
+        }else{
+          document.getElementById("field").innerHTML = ReqTxt;
+          console.log('22');
+        }
+        // 이슈 공통 부분
+        document.getElementById("testUrl").innerHTML = $("#url").val();
+        document.getElementById("out").innerHTML = menuPathTemp.innerHTML; // 신기하게도 innerHTML으로 해야 추출이 된다..
+      });
+
+    </script>
   <script>
 // 클립보드로 복사하는 기능을 생성
 function copyToClipboard(elementId) {
@@ -548,24 +631,7 @@ function copyToClipboard(elementId) {
 
 <!-- 복사 버튼 -->
 <button onclick="copyToClipboard('out')">텍스트 복사하기</button>
-<script type="text/javascript">
-  // 이름
-  document.getElementById("name").innerHTML = "나동근"; // 초기값
-  // 날짜
-  var today = new Date();
-  var dd = today.getDate()+3;
-  var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear();
+<hr>
 
-  if(dd<10) {
-      dd='0'+dd
-  }
-  if(mm<10) {
-      mm='0'+mm
-  }
-  today = yyyy+'-'+mm+'-'+dd;
-  document.getElementById("dateOption").value = today;
-  document.getElementById("date").innerHTML = today;
-</script>
   </body>
 </html>
