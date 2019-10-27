@@ -18,12 +18,22 @@ $(document).ready(function(){
 
     var text = $("#data").val();
 
-    switch (text) {
+    var pattern = /(.*net|.*kr)\/(.*)/;
+    console.log(pattern.test(text));
+    console.log(RegExp.$2);
+
+    // 정규식 정리 http://www.nextree.co.kr/p4327/
+    // 정규식 패턴 확인 https://regexr.com/
+
+    switch (RegExp.$2) {
       case "cus/login":
         text = "(로그인 화면)";
         break;
       case "cus/selectProduct":
         text = "(이용 서비스 선택)";
+        break;
+      case "mrs2/manager/dashboard":
+        text = "[2.0] > (메인 화면)";
         break;
       case "mrs2/manager/resume/popResume":
         text = "[2.0] > (이력서 팝업)";
@@ -514,6 +524,9 @@ function copyToClipboard(elementId) {
 
 <!-- 복사 버튼 -->
 <button onclick="copyToClipboard('out')">텍스트 복사하기</button>
+
+
+
 
   </body>
 </html>
