@@ -489,13 +489,14 @@ $(document).ready(function(){
 		// 들어가는 데이터는 #url의 값(.val())이다. (getter)
 		// 메서드 괄호 안에 아무것도 없으면 getter, 파라미터가 있으면 setter이다.
 	});
-  var name = $("#nameOption").val();
+
   $("#nameOption").change(function(){
+    var name = $("#nameOption").val();
     $("#name").text(name);
   });
 
-  var date = $("#dateOption").val();
   $("#dateOption").change(function(){
+    var date = $("#dateOption").val();
     $("#date").text(date);
   });
 
@@ -531,10 +532,15 @@ $(document).ready(function(){
       var name = nameOption.options[nameOption.selectedIndex].value;
       // 날짜
       var today = new Date();
-      var dd = today.getDate()+3;
+      var dd = today.getDate();
       var mm = today.getMonth()+1; //January is 0!
       var yyyy = today.getFullYear();
-
+      if(dd<28){
+        dd = dd+3;
+      }else{
+        dd = 30-dd;
+        mm = mm+1;
+      }
       if(dd<10) {
           dd='0'+dd
       }
@@ -551,6 +557,7 @@ $(document).ready(function(){
         document.getElementById("testUrl").innerHTML = txt;
         console.log('keyup중..');
       });
+
     </script>
     <script type="text/javascript">
       var issueType = document.getElementById("issueType").value;
@@ -606,10 +613,10 @@ $(document).ready(function(){
           console.log('22');
         }
         // 이슈 공통 부분
+        document.getElementById("name").innerHTML = $("#nameOption").val();
         document.getElementById("testUrl").innerHTML = $("#url").val();
         document.getElementById("out").innerHTML = menuPathTemp.innerHTML; // 신기하게도 innerHTML으로 해야 추출이 된다..
       });
-
     </script>
     <!-- 복사 버튼 -->
     <button id="copyButton" onclick="copyToClipboard()">텍스트 복사하기</button>
